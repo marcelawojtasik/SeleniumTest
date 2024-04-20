@@ -11,19 +11,33 @@ import org.springframework.boot.test.context.SpringBootTest;
 class Clase26ApplicationTests {
 
 	@Test
-	void seleniumTest() {
+	void seleniumTest() throws InterruptedException {
 		System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
 
 		WebDriver driver = new FirefoxDriver();
 
-		driver.get("https://www.wikipedia.org");
+		try{
+			driver.get("https://www.wikipedia.org");
+			WebElement searchInput = driver.findElement(By.id("searchInput"));
+			searchInput.sendKeys("Instituto de Astronomía y Física del Espacio");
+			searchInput.submit();
 
-		WebElement searchInput = driver.findElement(By.id("searchInput"));
-		searchInput.sendKeys("Instituto de Astronomía y Física del Espacio");
-		searchInput.submit();
+			Thread.sleep(5000);
+			String pageTitle = driver.getTitle();
+			if(pageTitle.contains("Instituto de Astronomía y Física del Espacio")){
+				System.out.println("Test ok");
+			} else {
+				System.out.println("Test not ok");
+			}
+		} catch (Error e){
+			e.printStackTrace();
+			System.out.println("Se detectó un error "+e);
+		} finally {
+				driver.quit();
+			}
+		}
 
 
-		//driver.quit();
 	}
 
-}
+
