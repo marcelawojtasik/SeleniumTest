@@ -1,6 +1,6 @@
 package com.example.selenium;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,10 +8,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Clase26ApplicationTests {
+public class Clase26ApplicationTests {
 
 	@Test
-	void seleniumTest() throws InterruptedException {
+    public void seleniumTest() throws InterruptedException {
 		System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
 
 		WebDriver driver = new FirefoxDriver();
@@ -33,7 +33,7 @@ class Clase26ApplicationTests {
 			e.printStackTrace();
 			System.out.println("Se detectó un error "+e);
 		} finally {
-				driver.quit();
+				driver.quit(); //para que se cierre la instancia del navegador
 			}
 		}
 
